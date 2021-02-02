@@ -8,14 +8,18 @@
 </head>
 <body>
 
-<h1>See all the cupcakes!</h1>
+<h1>Cupcakes List</h1>
 
 <ul id="cupcakes-list">
+
+{% for cupcake in cupcakes %}
+<li>{{ cupcake.flavor }} - <button id="remove-cupcake" data-id=""></button></li>
+{% endfor%}
 </ul>
 
 <h2>Add a new cupcake!</h2>
 
-<form id="new-cupcake-form">
+<form id="new-cupcake-form" method="POST" action="/api/cupcakes">
   <div>
     <label for="form-flavor">Flavor: </label>
     <input name="flavor" id="form-flavor">
@@ -36,7 +40,7 @@
     <input name="image" id="form-image">
   </div>
 
-  <button>Add!</button>
+  <button type="submit">Add!</button>
 </form>
 
 <script src="st"></script>

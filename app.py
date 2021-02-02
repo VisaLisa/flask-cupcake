@@ -13,13 +13,12 @@ app.config['SECRET_KEY'] = "secretpw"
 
 
 connect_db(app)
-db.create_all()
 
 @app.route("/")
 def root():
     """Render homepage."""
-
-    return render_template("index.html")
+    cupcakes = Cupcake.query.all()
+    return render_template("index.html", cupcakes=cupcakes)
 
 @app.route("/api/cupcakes")
 def list_cupcakes():
@@ -29,7 +28,7 @@ def list_cupcakes():
 # GET /api/cupcakes/[cupcake-id]
 @app.route("/api/cupcakes", methods=["POST"])
 def create_cupcake():
-    data = request.json
+    data = request.form
 
     new_cupcake = Cupcake(
         flavor=data['flavor'],
